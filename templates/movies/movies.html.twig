@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	{% if data is defined %}
+		<div id="contentMedia">
+			<iframe width="420" height="315" src="{{ data.video_url }}"></iframe>
+			<h3>{{ data.title }}</h3>
+			<p>{{ data.overview }}</p>
+		</div>
+		{% for movie in data.movies_list %}
+			<div class="card">
+				<div class="card-body">
+					<div class="row">
+						<div class="col-3">
+							<img src="https://image.tmdb.org/t/p/original/{{ movie.poster_path }}" class="card-img-top image" alt="{{ movie.title }}">
+						</div>
+						<div class="col-6">
+							<h5 class="card-title">{{ movie.title }}</h5>
+							<p class="card-text">{{ movie.overview }}</p>
+							<div id="dialog" title="Basic dialog">
+								<p>This is an animated dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
+							</div>
+
+							<button id="opener">Lire les détails</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			{# {{dump(movie)}} #}
+		{% endfor %}
+	{% endif %}
+{% endblock %}

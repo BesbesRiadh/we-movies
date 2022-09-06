@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}WeMovies!
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="row">
+			<div id="leftNav" class="col">
+				{% for genre in genres %}
+					{% for info in genre %}
+						<label class="label">
+							<span class="checkmark"></span>
+							<input id="{{ info.name }}" type="radio" name="genre" value="{{ info.id }}">
+							{{ info.name }}
+						</label>
+					{% endfor %}
+				{% endfor %}
+			</div>
+			<div class="content col">
+				{{ include('movies/movies.html.twig')}}
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

@@ -9,4 +9,7 @@
 import './styles/app.css';
 
 // start the Stimulus application
+// import 'jquery/dist/jquery.js';
 import './bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './movies.js'
