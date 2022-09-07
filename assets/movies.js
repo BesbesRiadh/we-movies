@@ -15,22 +15,39 @@ $('input[type=radio][name=genre]').change(function (e) {
             $("#" + id).prop("checked", true);
         }
     });
-    
+
 });
 
-$("#dialog").dialog({
-    autoOpen: false,
-    show: {
-        effect: "blind",
-        duration: 1000
-    },
-    hide: {
-        effect: "explode",
-        duration: 1000
+$('.opener').bind('click', function () {
+    $(this).parent().children('.overlay').show();
+    $('.center').show();
+})
+
+$('.close').bind('click', function () {
+    $('.overlay').hide();
+    $('.center').hide();
+})
+
+$('#search').on('keyup', function () {
+    let val = this.value;
+    let res = document.getElementById("result");
+    let i = 0;
+    res.innerHTML = '';
+    if (val == '') {
+        return;
     }
-});
-
-//Open it when #opener is clicked
-$('button[id=opener]').click(function () {
-    alert('ok');
-});
+    let list = '';
+    fetch('https://api.themoviedb.org/3/search/movie?api_key=7445e5badc55fdf77489bc4492cf1acc&query=' + val).then(
+        function (response) {
+            return response.json();
+        }).then(function (data) {
+            for (i = 0; i < data['results'].length; i++) {
+                list += '<li>' + data['results'][i]['original_title'] + '</li>';
+            }
+            res.innerHTML = '<ul>' + list + '</ul>';
+            return true;
+        }).catch(function (err) {
+            console.warn('Something went wrong.', err);
+            return false;
+        });
+})
