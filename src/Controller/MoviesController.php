@@ -18,6 +18,7 @@ class MoviesController extends AbstractController
         return $this->render('movies/index.html.twig', [
             //Récupérer les genres et les afficher 
             'genres' =>  $moviesService->getGenres(),
+            'dataPopular' => $moviesService->getMostPopular()
         ]);
     }
 

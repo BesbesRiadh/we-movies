@@ -13,6 +13,7 @@ $('input[type=radio][name=genre]').change(function (e) {
         success: function (returnedData) {
             $(this).empty().html(returnedData);
             $("#" + id).prop("checked", true);
+            $('.mostPopular').hide();
         }
     });
 

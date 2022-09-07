@@ -28,6 +28,31 @@ class MoviesService
         return $response->toArray();
     }
 
+    public function getMostPopular(): array
+    {
+
+        $response = $this->client->request(
+            "GET",
+            'https://api.themoviedb.org/3/movie/popular?api_key=' . $this->api_key . '&language=fr-FR&page=1'
+        );
+        $movieInformation = $response->toArray();
+        $movieId = $movieInformation['results'][0]['id'];
+
+        $response = $this->client->request(
+            "GET",
+            'https://api.themoviedb.org/3/movie/' . $movieId . '/videos?api_key=' . $this->api_key . '&language=fr-FR'
+        );
+        $movieMedia = $response->toArray();
+        
+        $data = array(
+            "title" => $movieInformation['results'][0]['title'],
+            "overview" => $movieInformation['results'][0]['overview'],
+            "video_url" => "https://www.youtube.com/embed/" . $movieMedia['results'][0]['key'],
+        );
+
+        return $data;
+    }
+
     public function getPopularMovieData($genreId): array
     {
 
@@ -41,7 +66,7 @@ class MoviesService
 
         $response = $this->client->request(
             "GET",
-            'https://api.themoviedb.org/3/movie/'. $movieId .'/videos?api_key='. $this->api_key .'&language=fr-FR'
+            'https://api.themoviedb.org/3/movie/' . $movieId . '/videos?api_key=' . $this->api_key . '&language=fr-FR'
         );
         $movieMedia = $response->toArray();
 
