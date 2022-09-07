@@ -4,7 +4,6 @@ $('input[type=radio][name=genre]').change(function (e) {
     e.stopImmediatePropagation();
     let value = this.value;
     let id = this.id;
-    console.log(value);
     $.ajax({
         type: "POST",
         url: 'movies',
