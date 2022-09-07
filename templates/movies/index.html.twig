@@ -5,22 +5,10 @@
 
 {% block body %}
 	<div class="container" id="container">
-		<div class="searchdiv">
-			<form autocomplete="off"><input type="text" name="search" id="search"/>
-			</form>
-			<div id="result" class="result"></div>
-		</div>
+		{{ include('movies/search.html.twig')}}
 		<div class="row">
 			<div id="leftNav" class="col">
-				{% for genre in genres %}
-					{% for info in genre %}
-						<label class="label">
-							<span class="checkmark"></span>
-							<input id="{{ info.name }}" type="radio" name="genre" value="{{ info.id }}">
-							{{ info.name }}
-						</label>
-					{% endfor %}
-				{% endfor %}
+				{{ include('movies/genres.html.twig')}}
 			</div>
 			<div class="content col">
 				{{ include('movies/movies.html.twig')}}

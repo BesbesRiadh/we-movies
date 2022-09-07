@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	{% for genre in genres %}
+		{% for info in genre %}
+			<label class="label">
+				<span class="checkmark"></span>
+				<input id="{{ info.name }}" type="radio" name="genre" value="{{ info.id }}">
+				{{ info.name }}
+			</label>
+		{% endfor %}
+	{% endfor %}
+{% endblock %}
